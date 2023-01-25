@@ -1,0 +1,344 @@
+#!/bin/bash
+
+choose_distro() {
+    echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
+    PS3="Please choose a distro image to download (1-6): "
+    distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Debian 11 (GenericCloud)"
+        "Fedora Cloud 37 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
+    select distro in "${distro_list[@]}"; do
+        case $distro in
+        "${distro_list[0]}")
+            echo -e "${distro_list[0]}"
+            URL="https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+            CLOUDIMG_NAME="jammy-server-cloudimg-amd64.qcow2"
+            break
+            ;;
+        "${distro_list[1]}")
+            echo -e "${distro_list[1]}"
+            URL="https://cloud-images.ubuntu.com/minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64.img"
+            CLOUDIMG_NAME="ubuntu-22.04-minimal-cloudimg-amd64"
+            break
+            ;;
+        "${distro_list[2]}")
+            echo -e "${distro_list[2]}"
+            URL="https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2"
+            CLOUDIMG_NAME="debian-11-genericcloud-amd64"
+            break
+            ;;
+        "${distro_list[3]}")
+            echo -e "${distro_list[3]}"
+            URL="https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
+            CLOUDIMG_NAME="Fedora-Cloud-Base-37-1.7.x86_64"
+            break
+            ;;
+        "${distro_list[4]}")
+            echo -e "${distro_list[4]}"
+            URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
+            CLOUDIMG_NAME="AlmaLinux-9-GenericCloud-latest.x86_64"
+            break
+            ;;
+        "Quit")
+            exit 0
+            ;;
+        *) echo -e "Invalid choice option $REPLY" ;;
+        esac
+    done
+}
+
+choose_id() {
+    existing_id=true
+    while [ ${existing_id} = true ]; do
+        while :; do
+            echo -e "\n"
+            read -r -ep 'Enter VM ID for the template (from 100): ' ID
+            [[ $ID =~ ^[[:digit:]]+$ ]] || continue
+            ((((ID = (10#$ID)) <= 999999999) && ID >= 100)) || continue
+            break
+        done
+        if ( (qm status "${ID}" 2>/dev/null)); then
+            echo -e "ID is in use"
+            existing_id=true
+        else
+            existing_id=false
+        fi
+    done
+}
+
+choose_storage() {
+    echo -e "\n" && pvesm status
+    existing_storage=false
+    while [ ${existing_storage} = false ]; do
+        read -r -ep 'Choose Promxox VE storage (by Name): ' STORAGE
+        if ( (pvesm list "${STORAGE}" 2>/dev/null)); then
+            existing_storage=true
+        else
+            echo -e "Invalid storage"
+            existing_storage=false
+        fi
+    done
+
+    echo -e "\n"
+    valid_choice=false
+    while [ ${valid_choice} = false ]; do
+        read -r -ep "Is the chosen storage using an SSD? (y/n) " selection
+        case "$selection" in
+        y | Y | yes | Yes)
+            SSD=true
+            valid_choice=true
+            ;;
+        n | N | no | No)
+            SSD=false
+            valid_choice=true
+            ;;
+        *)
+            echo -e "Invalid choice"
+            valid_choice=false
+            ;;
+        esac
+    done
+}
+
+choose_agent() {
+    echo -e "\n"
+    valid_choice=false
+    while [ ${valid_choice} = false ]; do
+        read -r -ep "Should the qemu-guest-agent package be pre-installed in the image? (y/n) " selection
+        case "$selection" in
+        y | Y | yes | Yes)
+            agent=true
+            valid_choice=true
+            ;;
+        n | N | no | No)
+            agent=false
+            valid_choice=true
+            ;;
+        *)
+            echo -e "Invalid choice"
+            valid_choice=false
+            ;;
+        esac
+    done
+}
+
+choose_libguestfs() {
+    if "${agent}"; then
+        if command -v virt-customize --version &>/dev/null; then
+            libguestfs=true
+        else
+            echo -e "\n"
+            echo -e "In order to pre-install qemu-guest-agent in the image, libguestfs-tools is required."
+            valid_choice=false
+            while [ ${valid_choice} = false ]; do
+                read -r -ep "Install libguestfs-tools? (y/n) " selection
+                case "$selection" in
+                y | Y | yes | Yes)
+                    libguestfs=true
+                    valid_choice=true
+                    ;;
+                n | N | no | No)
+                    libguestfs=false
+                    valid_choice=true
+                    ;;
+                *)
+                    echo -e "Invalid choice"
+                    valid_choice=false
+                    ;;
+                esac
+            done
+        fi
+    fi
+}
+
+download_image() {
+    if [ -f "$CLOUDIMG_NAME" ]; then
+        echo -e "\nDistro image already downloaded."
+
+        valid_choice=false
+        while [ ${valid_choice} = false ]; do
+            read -r -ep "Download image again? (y/n) " selection
+            case "$selection" in
+            y | Y | yes | Yes)
+                wget "${URL}" -O "${CLOUDIMG_NAME}"
+                valid_choice=true
+                ;;
+            n | N | no | No)
+                true
+                valid_choice=true
+                ;;
+            *)
+                echo -e "Invalid choice"
+                valid_choice=false
+                ;;
+            esac
+        done
+    else
+        wget "${URL}" -O "${CLOUDIMG_NAME}"
+    fi
+}
+
+qm_create() {
+    # create a new VM with VirtIO SCSI single controller
+    qm create "${ID}" --name "${TEMPLATE_NAME}" --memory 2048 --core 1 \
+        --net0 virtio,bridge=vmbr0,firewall=1 --scsihw virtio-scsi-single \
+        --agent "${agent_params}"
+
+    # import the downloaded disk to the storage, attaching it as a SCSI drive
+    qm importdisk "${ID}" "${CLOUDIMG_NAME}" "${STORAGE}"
+    qm set "${ID}" --scsihw virtio-scsi-single \
+        --scsi0 file="${STORAGE}":"${ID}"/vm-"${ID}"-disk-0.raw,iothread=1,"${ssd_params}"
+
+    # configure a CD-ROM drive, which will be used to pass the Cloud-Init data to the VM
+    qm set "${ID}" --ide2 "${STORAGE}":cloudinit
+
+    # set the boot parameter to order=scsi0 to restrict BIOS to boot from this disk only
+    qm set "${ID}" --boot order=scsi0
+
+    # configure a serial console and use it as a display
+    qm set "${ID}" --serial0 socket --vga serial0
+
+    # Set the default IP to DHCP in Cloud-Init (can be changed later through Cloud-Init)
+    qm set "${ID}" --ipconfig0 ip=dhcp
+
+    # convert the VM into a template
+    qm template "${ID}"
+}
+
+cleanup() {
+    echo -e "\n"
+
+    valid_choice=false
+    while [ ${valid_choice} = false ]; do
+        read -r -ep "Perform post-install cleanup? (y/n) " selection
+        case "$selection" in
+        y | Y | yes | Yes)
+            cleanup=true
+            valid_choice=true
+            ;;
+        n | N | no | No)
+            cleanup=false
+            valid_choice=true
+            ;;
+        *)
+            echo -e "Invalid choice"
+            valid_choice=false
+            ;;
+        esac
+    done
+
+    if "${cleanup}"; then
+        echo -e "\nPost-install cleanup:"
+
+        valid_choice=false
+        while [ ${valid_choice} = false ]; do
+            read -r -ep "Remove libguestfs-tools? (y/n) " selection
+            case "$selection" in
+            y | Y | yes | Yes)
+                apt-get autopurge -y libguestfs-tools
+                valid_choice=true
+                ;;
+            n | N | no | No)
+                true
+                valid_choice=true
+                ;;
+            *)
+                echo -e "Invalid choice"
+                valid_choice=false
+                ;;
+            esac
+        done
+    fi
+
+    echo -e "\n"
+    valid_choice=false
+    while [ ${valid_choice} = false ]; do
+        read -r -ep "Delete downloaded cloud image file? (y/n) " selection
+        case "$selection" in
+        y | Y | yes | Yes)
+            rm "${CLOUDIMG_NAME}"
+            valid_choice=true
+            ;;
+        n | N | no | No)
+            true
+            valid_choice=true
+            ;;
+        *)
+            echo -e "Invalid choice"
+            valid_choice=false
+            ;;
+        esac
+    done
+
+    echo -e "\n"
+    valid_choice=false
+    while [ ${valid_choice} = false ]; do
+        read -r -ep "Delete VM template that was JUST created by this script? (y/n) " selection
+        case "$selection" in
+        y | Y | yes | Yes)
+            qm destroy "${ID}"
+            valid_choice=true
+            ;;
+        n | N | no | No)
+            true
+            valid_choice=true
+            ;;
+        *)
+            echo -e "Invalid choice"
+            valid_choice=false
+            ;;
+        esac
+    done
+}
+
+main() {
+    choose_distro "$@"
+    choose_agent "$@"
+    choose_id "$@"
+    choose_storage "$@"
+    choose_libguestfs "$@"
+    TEMPLATE_NAME="Template-${CLOUDIMG_NAME}"
+
+    # # add date to filename
+    # date=$(date --iso-8601=date)
+    # CLOUDIMG_NAME="${CLOUDIMG_NAME}_${date}"
+
+    # add .qcow2 file extension to filename if missing
+    case "${CLOUDIMG_NAME}" in
+    *.qcow2) true ;;
+    *) CLOUDIMG_NAME="${CLOUDIMG_NAME}.qcow2" ;;
+    esac
+
+    # download the image
+    download_image "$@"
+
+    # install qemu-guest-agent (requires libguestfs-tools)
+    # and configure agent parameters
+    if "${agent}"; then
+        if "${libguestfs}"; then
+            apt-get install -y libguestfs-tools
+            virt-customize -a "${CLOUDIMG_NAME}" --install qemu-guest-agent
+
+            agent_params="enabled=1,fstrim_cloned_disks=1"
+        else
+            agent_params="enabled=0"
+        fi
+    fi
+
+    # configure SSD parameters
+    if "${SSD}"; then
+        ssd_params="discard=on,ssd=1"
+    else
+        ssd_params=""
+    fi
+
+    qm_create "$@"
+
+    echo -e "\n"
+    echo -e "Install complete!
+    $(basename "${CLOUDIMG_NAME}" ".qcow2") installed as PVE Template #${ID}"
+
+    cleanup "$@"
+}
+
+main "$@"
+
+exit 0

@@ -1,6 +1,6 @@
 # Proxmox VE script for generating Cloud-init templates
 
-A user-friendly guided Bash script for Proxmox VE 7.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
+A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
 
 Various distros are avaible to download and configure. Current choices includes:
 - Ubuntu Cloud 22.04
@@ -11,11 +11,23 @@ Various distros are avaible to download and configure. Current choices includes:
 
 ## FAQ
 ### What is Cloud-init?
-[Cloud-init](https://cloudinit.readthedocs.io/) makes it easy to deploy virtual machine. Instead of going through a lengthy installation ISO, you simply set up the wanted values before installation, then the VM boots up automatically configuring itself.
+[Cloud-init](https://cloudinit.readthedocs.io/) makes it easy to deploy virtual machines; Instead of going through a lengthy installation ISO, you simply set up the wanted values before installation, then the VM boots up and automatically configures itself.
 
 ### How can Cloud-init be used together with Proxmox VE?
 
 [Proxmox VE includes Cloud-init support](https://pve.proxmox.com/wiki/Cloud-Init_Support). You can download any supported cloud image and configure it to use Cloud-init. This script simply automates this process. For more information, refer to the resources below.
+
+### How to run this script?
+SSH into your PVE server. Download or clone a release then run `bash pve_script.sh`. Follow the guided instructions.
+
+### What to do after running the script?
+When the script finishes, you should get a message stating the name and ID of your newly created PVE template. Go to the Proxmox VE Web UI (default port 8006) to view your template. You can then clone the template to create a new VM.
+
+### How to configure a Cloud-init VM?
+After cloning a template into a new VM, view your new VM in the Proxmox VE web UI, choose the "Cloud-init" tab and configure any options you want (e.g. username, password, SSH public key and network settings). Make sure to also modify any VM that you want to change under the "Hardware" tab (e.g. Memory and Hard Disk size). Then boot up your system and it will automitically configure itself with Cloud-init and your chosen options! If you configured an SSH public key, you will be able to SSH into your new VM.
+
+### How to further automate this?
+You can use Terraform together with the [Telmate/proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest) to deploy VMs based on templates.
 
 
 ## Resources

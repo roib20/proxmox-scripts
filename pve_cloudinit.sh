@@ -345,8 +345,12 @@ main() {
     qm_create "$@"
 
     echo -e "\n"
-    echo -e "Install complete!
+    if ( (qm status "${ID}" 2>/dev/null)); then
+        echo -e "Install complete!
     $(basename "${CLOUDIMG_NAME}" ".qcow2") installed as PVE Template #${ID}"
+    else
+        echo -e "Install failed. Please try again."
+    fi
 
     cleanup "$@"
 }

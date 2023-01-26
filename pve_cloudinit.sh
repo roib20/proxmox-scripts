@@ -3,38 +3,48 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Debian 11 (GenericCloud)"
+    local distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Debian 11 (GenericCloud)"
         "Fedora Cloud 37 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
         "${distro_list[0]}")
             echo -e "${distro_list[0]}"
-            URL="https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
-            CLOUDIMG_NAME="jammy-server-cloudimg-amd64.qcow2"
+            IMAGE_URL="https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+            CHECKSUM_URL="https://cloud-images.ubuntu.com/jammy/current/SHA256SUMS"
+            SHA=256
+            CLOUDIMG_NAME="jammy-server-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[1]}")
             echo -e "${distro_list[1]}"
-            URL="https://cloud-images.ubuntu.com/minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64.img"
-            CLOUDIMG_NAME="ubuntu-22.04-minimal-cloudimg-amd64"
+            IMAGE_URL="https://cloud-images.ubuntu.com/minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64.img"
+            CHECKSUM_URL="https://cloud-images.ubuntu.com/minimal/releases/jammy/release/SHA256SUMS"
+            SHA=256
+            CLOUDIMG_NAME="ubuntu-22.04-minimal-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[2]}")
             echo -e "${distro_list[2]}"
-            URL="https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2"
-            CLOUDIMG_NAME="debian-11-genericcloud-amd64"
+            IMAGE_URL="https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2"
+            CHECKSUM_URL="https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS"
+            SHA=512
+            CLOUDIMG_NAME="debian-11-genericcloud-amd64.qcow2"
             break
             ;;
         "${distro_list[3]}")
             echo -e "${distro_list[3]}"
-            URL="https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
-            CLOUDIMG_NAME="Fedora-Cloud-Base-37-1.7.x86_64"
+            IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
+            CHECKSUM_URL="https://getfedora.org/static/checksums/37/images/Fedora-Cloud-37-1.7-x86_64-CHECKSUM"
+            SHA=256
+            CLOUDIMG_NAME="Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
             break
             ;;
         "${distro_list[4]}")
             echo -e "${distro_list[4]}"
-            URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
-            CLOUDIMG_NAME="AlmaLinux-9-GenericCloud-latest.x86_64"
+            IMAGE_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
+            CHECKSUM_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/CHECKSUM"
+            SHA=256
+            CLOUDIMG_NAME="AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
             break
             ;;
         "Quit")
@@ -46,7 +56,7 @@ choose_distro() {
 }
 
 choose_id() {
-    existing_id=true
+    local existing_id=true
     while [ ${existing_id} = true ]; do
         while :; do
             echo -e "\n"
@@ -66,7 +76,7 @@ choose_id() {
 
 choose_storage() {
     echo -e "\n" && pvesm status
-    existing_storage=false
+    local existing_storage=false
     while [ ${existing_storage} = false ]; do
         read -r -ep 'Choose Promxox VE storage (by Name): ' STORAGE
         if ( (pvesm list "${STORAGE}" 2>/dev/null)); then
@@ -78,7 +88,7 @@ choose_storage() {
     done
 
     echo -e "\n"
-    valid_choice=false
+    local valid_choice=false
     while [ ${valid_choice} = false ]; do
         read -r -ep "Is the chosen storage using an SSD? (y/n) " selection
         case "$selection" in
@@ -100,7 +110,7 @@ choose_storage() {
 
 choose_agent() {
     echo -e "\n"
-    valid_choice=false
+    local valid_choice=false
     while [ ${valid_choice} = false ]; do
         read -r -ep "Should the qemu-guest-agent package be pre-installed in the image? (y/n) " selection
         case "$selection" in
@@ -127,7 +137,7 @@ choose_libguestfs() {
         else
             echo -e "\n"
             echo -e "In order to pre-install qemu-guest-agent in the image, libguestfs-tools is required."
-            valid_choice=false
+            local valid_choice=false
             while [ ${valid_choice} = false ]; do
                 read -r -ep "Install libguestfs-tools? (y/n) " selection
                 case "$selection" in
@@ -153,12 +163,13 @@ download_image() {
     if [ -f "$CLOUDIMG_NAME" ]; then
         echo -e "\nDistro image already downloaded."
 
-        valid_choice=false
+        local valid_choice=false
         while [ ${valid_choice} = false ]; do
             read -r -ep "Download image again? (y/n) " selection
             case "$selection" in
             y | Y | yes | Yes)
-                wget "${URL}" -O "${CLOUDIMG_NAME}"
+                wget "${IMAGE_URL}" -O "${CLOUDIMG_NAME}"
+                wget -q -O - "${CHECKSUM_URL}" | grep "${CLOUDIMG_NAME}" | sha"${SHA}"sum -c --ignore-missing
                 valid_choice=true
                 ;;
             n | N | no | No)
@@ -172,7 +183,10 @@ download_image() {
             esac
         done
     else
-        wget "${URL}" -O "${CLOUDIMG_NAME}"
+        wget "${IMAGE_URL}" -O "${CLOUDIMG_NAME}"
+        if (wget -q -O - "${CHECKSUM_URL}" | grep "${CLOUDIMG_NAME}" | sha"${SHA}"sum -c --ignore-missing); then
+            true
+        fi
     fi
 }
 
@@ -206,7 +220,7 @@ qm_create() {
 cleanup() {
     echo -e "\n"
 
-    valid_choice=false
+    local valid_choice=false
     while [ ${valid_choice} = false ]; do
         read -r -ep "Perform post-install cleanup? (y/n) " selection
         case "$selection" in
@@ -228,7 +242,7 @@ cleanup() {
     if "${cleanup}"; then
         echo -e "\nPost-install cleanup:"
 
-        valid_choice=false
+        local valid_choice=false
         while [ ${valid_choice} = false ]; do
             read -r -ep "Remove libguestfs-tools? (y/n) " selection
             case "$selection" in
@@ -249,7 +263,7 @@ cleanup() {
     fi
 
     echo -e "\n"
-    valid_choice=false
+    local valid_choice=false
     while [ ${valid_choice} = false ]; do
         read -r -ep "Delete downloaded cloud image file? (y/n) " selection
         case "$selection" in
@@ -269,7 +283,7 @@ cleanup() {
     done
 
     echo -e "\n"
-    valid_choice=false
+    local valid_choice=false
     while [ ${valid_choice} = false ]; do
         read -r -ep "Delete VM template that was JUST created by this script? (y/n) " selection
         case "$selection" in
@@ -291,24 +305,36 @@ cleanup() {
 
 main() {
     choose_distro "$@"
-    choose_agent "$@"
     choose_id "$@"
     choose_storage "$@"
+    choose_agent "$@"
     choose_libguestfs "$@"
-    TEMPLATE_NAME="Template-${CLOUDIMG_NAME}"
+    TEMPLATE_NAME="Template-Cloud-init"
 
     # # add date to filename
     # date=$(date --iso-8601=date)
     # CLOUDIMG_NAME="${CLOUDIMG_NAME}_${date}"
 
-    # add .qcow2 file extension to filename if missing
-    case "${CLOUDIMG_NAME}" in
-    *.qcow2) true ;;
-    *) CLOUDIMG_NAME="${CLOUDIMG_NAME}.qcow2" ;;
-    esac
-
     # download the image
     download_image "$@"
+
+    # # add .qcow2 file extension to filename if missing
+    # case "${CLOUDIMG_NAME}" in
+    # *.qcow2) true ;;
+    # *.img) mv "$(basename "${CLOUDIMG_NAME}" ".img")" "${CLOUDIMG_NAME}.qcow2" ;;
+    # *) mv "${CLOUDIMG_NAME}" "${CLOUDIMG_NAME}.qcow2" ;;
+    # esac
+
+    # configure SSD parameters
+    if "${SSD}"; then
+        ssd_params="discard=on,ssd=1"
+    else
+        ssd_params=""
+    fi
+
+    # # add date to filename
+    # date=$(date --iso-8601=date)
+    # cp "${CLOUDIMG_NAME}" "CLOUDIMG_${date}.qcow2"
 
     # install qemu-guest-agent (requires libguestfs-tools)
     # and configure agent parameters
@@ -321,13 +347,8 @@ main() {
         else
             agent_params="enabled=0"
         fi
-    fi
-
-    # configure SSD parameters
-    if "${SSD}"; then
-        ssd_params="discard=on,ssd=1"
     else
-        ssd_params=""
+        agent_params="enabled=0"
     fi
 
     qm_create "$@"

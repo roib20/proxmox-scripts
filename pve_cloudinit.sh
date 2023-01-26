@@ -324,7 +324,7 @@ main() {
     if "${SSD}"; then
         ssd_params="discard=on,ssd=1"
     else
-        ssd_params=""
+        ssd_params="ssd=0"
     fi
 
     # install qemu-guest-agent (requires libguestfs-tools)

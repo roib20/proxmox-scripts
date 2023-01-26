@@ -2,7 +2,7 @@
 
 A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
 
-Various distros are avaible to download and configure. Current choices includes:
+Various distros are avaible to download and configure. Current choices include:
 - Ubuntu Cloud 22.04
 - Ubuntu Cloud 22.04 (Minimal)
 - Debian 11 (GenericCloud)

@@ -50,6 +50,6 @@ It is important to understand what any shell script does before blindly running 
 If you want an approach that's more "Infrastructure as Code (IaC)", you could instead use Ansible or Packer to generate these PVE Cloud-init templates:
 
 - Tim's Blog:
-	+ How to create a Proxmox Ubuntu cloud-init image: Proxmox Cloud-init image using Ansible: [Blog post](https://www.timatlee.com/post/proxmox-cloudinit-image-ansible/)
+	+ Proxmox Cloud-init image using Ansible: [Blog post](https://www.timatlee.com/post/proxmox-cloudinit-image-ansible/)
 - Christian Lempa:
 	+ Create VMs on Proxmox in Seconds! (Proxmox + Packer): [Video](https://youtu.be/1nf3WOEFq1Y) | [Packer Templates on GitHub](https://github.com/christianlempa/boilerplates/tree/main/packer/proxmox)

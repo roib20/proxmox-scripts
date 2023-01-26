@@ -25,10 +25,10 @@ Run the following command: `sudo bash -c "$(curl -fsSL https://raw.githubusercon
 When the script finishes, you should get a message stating the name and ID of your newly created PVE template. Go to the Proxmox VE Web UI (default port 8006) to view your template. You can then clone the template to create a new VM.
 
 ### How to configure a Cloud-init VM?
-After cloning a template into a new VM, view your new VM in the Proxmox VE web UI, choose the "Cloud-init" tab and configure any options you want (e.g. username, password, SSH public key and network settings). Make sure to also modify any VM that you want to change under the "Hardware" tab (e.g. Memory and Hard Disk size). Then boot up your system and it will automitically configure itself with Cloud-init and your chosen options! If you configured an SSH public key, you will be able to SSH into your new VM.
+After cloning a template into a new VM, view your new VM in the Proxmox VE web UI, choose the "Cloud-init" tab and configure any options you want (e.g. username, password, SSH public key and network settings). Make sure to also modify any VM options that you want to change under the "Hardware" tab (e.g. Memory and Hard Disk size). Then boot up your system and it will automatically configure itself with Cloud-init and your chosen options! If you configured an SSH public key, you will be able to SSH into your new VM.
 
 ### How to further automate this?
-After creating templates using this script (or other methods), you can then use Infrastructure as Code (IaC) tools to create VMs based on the created templates. For example, you can use Terraform together with the [Telmate/proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest), or Ansible together with the [community.general.proxmox module](https://docs.ansible.com/ansible/latest/collections/community/general/proxmox_module.html)
+After creating templates using this script (or other methods), you can then use Infrastructure as Code (IaC) tools to create VMs based on the created templates. For example, you can use Terraform together with the [Telmate/proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest), or Ansible together with the [community.general.proxmox module](https://docs.ansible.com/ansible/latest/collections/community/general/proxmox_module.html).
 
 
 ## Resources

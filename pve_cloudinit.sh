@@ -318,23 +318,12 @@ main() {
     # download the image
     download_image "$@"
 
-    # # add .qcow2 file extension to filename if missing
-    # case "${CLOUDIMG_NAME}" in
-    # *.qcow2) true ;;
-    # *.img) mv "$(basename "${CLOUDIMG_NAME}" ".img")" "${CLOUDIMG_NAME}.qcow2" ;;
-    # *) mv "${CLOUDIMG_NAME}" "${CLOUDIMG_NAME}.qcow2" ;;
-    # esac
-
     # configure SSD parameters
     if "${SSD}"; then
         ssd_params="discard=on,ssd=1"
     else
         ssd_params=""
     fi
-
-    # # add date to filename
-    # date=$(date --iso-8601=date)
-    # cp "${CLOUDIMG_NAME}" "CLOUDIMG_${date}.qcow2"
 
     # install qemu-guest-agent (requires libguestfs-tools)
     # and configure agent parameters

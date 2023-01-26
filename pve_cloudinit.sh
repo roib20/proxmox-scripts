@@ -186,6 +186,8 @@ download_image() {
         wget "${IMAGE_URL}" -O "${CLOUDIMG_NAME}"
         if (wget -q -O - "${CHECKSUM_URL}" | grep "${CLOUDIMG_NAME}" | sha"${SHA}"sum -c --ignore-missing); then
             true
+        else
+            exit 1
         fi
     fi
 }

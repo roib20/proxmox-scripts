@@ -8,6 +8,7 @@ choose_distro() {
         case $distro in
         "${distro_list[0]}")
             echo -e "${distro_list[0]}"
+            TEMPLATE_NAME="TrueNAS-SCALE"
             OSTYPE="l26"
             IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.0/TrueNAS-SCALE-22.12.0.iso"
             CLOUDIMG_NAME="TrueNAS-SCALE-22.12.0.iso"
@@ -17,6 +18,7 @@ choose_distro() {
             ;;
         "${distro_list[1]}")
             echo -e "${distro_list[1]}"
+            TEMPLATE_NAME="TrueNAS-CORE"
             OSTYPE="other"
             IMAGE_URL="https://download.freenas.org/13.0/STABLE/U3.1/x64/TrueNAS-13.0-U3.1.iso"
             CLOUDIMG_NAME="TrueNAS-13.0-U3.1.iso"
@@ -232,7 +234,7 @@ main() {
     choose_distro "$@"
     choose_id "$@"
     choose_storage "$@"
-    TEMPLATE_NAME="Template-Cloud-init"
+    # TEMPLATE_NAME="Template-TrueNAS"
 
     # download the ISO
     download_image "$@"

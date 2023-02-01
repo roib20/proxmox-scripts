@@ -59,3 +59,4 @@ It is important to understand what any shell script does before blindly running 
 	+ Getting Started/Install: [Docs](https://www.truenas.com/docs/core/gettingstarted/install/)
 - Serverbuilds.net:
 	+ Recommended SAS2 HBA (internal & external): [Forum](https://forums.serverbuilds.net/t/official-recommended-sas2-hba-internal-external/4581)
+	+ Updating your LSI SAS Controller with a UEFI Motherboard: [Forum](https://forums.serverbuilds.net/t/guide-updating-your-lsi-sas-controller-with-a-uefi-motherboard/131)

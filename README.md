@@ -6,8 +6,10 @@ Multiple versions of TrueNAS are available to download:
   - TrueNAS SCALE 22.12.0
   - TrueNAS CORE 13.0-U3.1
 
-## FAQ
+## Other Proxmox VE scripts:
+  -  [proxmox-cloudinit-script](https://github.com/roib20/proxmox-cloudinit-script)
 
+## FAQ
 ### What does the script do?
 This script automates the process of creating a TrueNAS virtual machine inside Proxmox VE. It downloads the ISO for the chosen version of TrueNAS, verifies it's SHA256 checksum, then configures a VM with it.
 

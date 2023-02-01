@@ -8,6 +8,7 @@ Multiple versions of TrueNAS are available to download:
 
 ## Other Proxmox VE scripts:
   -  [proxmox-cloudinit-script](https://github.com/roib20/proxmox-cloudinit-script)
+  -  [Proxmox Helper Scripts](https://tteck.github.io/Proxmox/)
 
 ## FAQ
 ### What does the script do?

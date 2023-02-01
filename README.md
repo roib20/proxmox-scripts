@@ -24,14 +24,14 @@ Default Settings: `8GB RAM - 32GB Storage - 1vCPU - Q35 Machine - OVMF (UEFI)`
 If TrueNAS SCALE is chosen then QEMU Agent is automatically enabled. [For TrueNAS CORE, QEMU Guest Agent needs to be installed manually](https://www.truenas.com/community/resources/qemu-guest-agent.167/).
 
 ### What are the recommended system requirements for the host?
-Based on the TrueNAS system requirements and my observation, I recommend:
-*Processor:* 2-Core Intel 64-Bit or AMD x86_64 processor
-*Memory:* 16 GB Memory (ECC recommended)
-*Boot device:* 64 GB SSD boot device
-*Storage:* Two or more identically-sized devices for a single storage pool
-*HBA card:* LSI 9207-8i (or similar), flashed in IT mode
+Based on the TrueNAS system requirements and my observation, I recommend at minimum:
+**Processor:** 2-Core Intel 64-Bit or AMD x86_64 processor  
+**Memory:** 16GB Memory (ECC recommended)  
+**Boot device:** 64GB SSD boot device  
+**Storage:** Two or more identically-sized drives for a single storage pool (the bigger the better) 
+**HBA card:** LSI 9207-8i (or similar), flashed in IT mode  
 
-Since this is virtualized, 8 GB of memory and 32 GB of storage will be dedicated to the configured VM (this is the script defaults). The rest of the memory and storage will be used for the host.
+Since this is virtualized, 8GB of memory and 32GB of storage will be dedicated to the configured VM (this is the script defaults). The rest of the memory and storage will be used for the host.
 
 ### Is HBA passthrough configured for the VM?
 This script does not fully configure the VM with an HBA card, this has to be done manually after the script is run. If you have an HBA card installed, follow the instructions in the Proxmox wiki to configure PCI passthrough (see resources below).

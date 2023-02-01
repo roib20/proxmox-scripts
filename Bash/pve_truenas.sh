@@ -125,17 +125,17 @@ qm_create() {
 
     qm set "${ID}" --efidisk0 "${STORAGE}":0,format=qcow2,efitype=4m,pre-enrolled-keys=0,size=528K
 
-    # qm set "${ID}" --scsihw virtio-scsi-single \
-    #     --scsi0 file="${STORAGE}":32,format=qcow2,iothread=1
+    qm set "${ID}" --scsihw virtio-scsi-single \
+        --scsi0 file="${STORAGE}":32,format=qcow2,iothread=1
 
-    qm set "${ID}" --hostpci0 --hostpci0 host=0000:01:00,pcie=1,rombar=1
+    # qm set "${VMID}" --hostpci0 --hostpci0 host"${device-id}",pcie=1,rombar=1
 
     # configure a CD-ROM drive, with the installation ISO
     qm set "${ID}" --ide2 media=cdrom,file=none
     qm set "${ID}" --ide2 media=cdrom,file=local:iso/"${CLOUDIMG_NAME}"
 
-    # set the boot parameter to order="ide2;net0"
-    qm set "${ID}" --boot order="ide2;net0"
+    # set the boot parameter to order="ide2;scsi0"
+    qm set "${ID}" --boot order="ide2;scsi0"
 }
 
 convert_to_template() {

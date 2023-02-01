@@ -9,6 +9,9 @@ Various distros are avaible to download and configure. Current choices include:
 - Fedora Cloud 37 (base)
 - AlmaLinux 9 (GenericCloud)
 
+## Other Proxmox VE scripts:
+  -  [proxmox-truenas-script](https://github.com/roib20/proxmox-truenas-script)
+
 ## FAQ
 ### What is Cloud-init?
 [Cloud-init](https://cloudinit.readthedocs.io/) makes it easy to deploy virtual machines; Instead of going through a lengthy installation ISO, you simply set up the wanted values before installation, then the VM boots up and automatically configures itself.

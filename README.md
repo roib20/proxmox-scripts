@@ -11,6 +11,7 @@ Various distros are avaible to download and configure. Current choices include:
 
 ## Other Proxmox VE scripts:
   -  [proxmox-truenas-script](https://github.com/roib20/proxmox-truenas-script)
+  -  [Proxmox Helper Scripts](https://tteck.github.io/Proxmox/)
 
 ## FAQ
 ### What is Cloud-init?

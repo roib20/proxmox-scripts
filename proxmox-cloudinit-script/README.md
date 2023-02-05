@@ -19,7 +19,7 @@ Various distros are avaible to download and configure. Current choices include:
 
 ### How to run this script?
 SSH into your PVE server.
-Run the following command: `sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/roib20/proxmox-cloudinit-script/main/pve_cloudinit.sh)"`
+Run the following command: `sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/roib20/proxmox-scripts/main/proxmox-cloudinit-script/pve_cloudinit.sh)"`
 
 ### What to do after running the script?
 When the script finishes, you should get a message stating the name and ID of your newly created PVE template. Go to the Proxmox VE Web UI (default port 8006) to view your template. You can then clone the template to create a new VM.

@@ -1,9 +1,9 @@
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 [![ShellCheck](https://github.com/roib20/proxmox-scripts/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/roib20/proxmox-scripts/actions/workflows/shellcheck.yml)
 
-# Proxmox Scripts by roib20
+# Proxmox Scripts by [roib20](https://github.com/roib20)
 
-Proxmox VE shell scripts for automating different types of VM installs. Current scripts include:
+Proxmox VE shell scripts for automating different types of Virtual Machine or Template installs. Current scripts include:
 
   - [proxmox-cloudinit-script](https://github.com/roib20/proxmox-scripts/tree/main/proxmox-cloudinit-script)
   - [proxmox-truenas-script](https://github.com/roib20/proxmox-scripts/tree/main/proxmox-truenas-script)

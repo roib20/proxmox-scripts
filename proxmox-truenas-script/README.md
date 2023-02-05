@@ -13,7 +13,7 @@ This script automates the process of creating a TrueNAS virtual machine inside P
 
 ### How to run this script?
 SSH into your PVE server.
-Run the following command: `sudo bash -c "$(wget -qLO - https://raw.githubusercontent.com/roib20/proxmox-truenas-script/main/Bash/pve_truenas.sh)"`
+Run the following command: `sudo bash -c "$(wget -qLO - https://raw.githubusercontent.com/roib20/proxmox-scripts/main/proxmox-truenas-script/Bash/pve_truenas.sh)"`
 
 ### What to do after running the script?
 When the script finishes, you should get a message stating the name and ID of your newly created PVE VM or template. Go to the Proxmox VE Web UI (default port 8006) to view it, change any options you want then boot it up to go through the TrueNAS installer. If asked for a boot mode during installation, choose "Boot via UEFI". After installation is complete, make sure to detach the ISO image from the VM, or change the boot order to use scsi0 instead of ide2.

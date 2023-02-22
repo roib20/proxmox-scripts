@@ -3,16 +3,16 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    local distro_list=("TrueNAS SCALE 22.12.0" "TrueNAS CORE 13.0-U3.1" "Quit")
+    local distro_list=("TrueNAS SCALE 22.12.1" "TrueNAS CORE 13.0-U3.1" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
         "${distro_list[0]}")
             echo -e "${distro_list[0]}"
             TEMPLATE_NAME="TrueNAS-SCALE"
             OSTYPE="l26"
-            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.0/TrueNAS-SCALE-22.12.0.iso"
-            CLOUDIMG_NAME="TrueNAS-SCALE-22.12.0.iso"
-            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.0/TrueNAS-SCALE-22.12.0.iso.sha256"
+            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.1/TrueNAS-SCALE-22.12.1.iso"
+            CLOUDIMG_NAME="TrueNAS-SCALE-22.12.1.iso"
+            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.1/TrueNAS-SCALE-22.12.1.iso.sha256"
             SHA=256
             break
             ;;

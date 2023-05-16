@@ -96,6 +96,8 @@ download_image() {
                 ;;
             esac
         done
+    else
+        download=true
     fi
 
     if [ "$download" = true ]; then

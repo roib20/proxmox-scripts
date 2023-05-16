@@ -16,7 +16,7 @@ choose_distro() {
             OSTYPE="l26"
             IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
             CLOUDIMG_NAME="TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
-            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}iso.sha256"
+            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
             SHA=256
             break
             ;;

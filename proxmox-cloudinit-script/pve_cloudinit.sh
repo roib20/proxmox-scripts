@@ -4,7 +4,7 @@ choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
     local distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Debian 11 (GenericCloud)"
-        "Fedora Cloud 37 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
+        "Fedora Cloud 38 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
         "${distro_list[0]}")
@@ -33,10 +33,10 @@ choose_distro() {
             ;;
         "${distro_list[3]}")
             echo -e "${distro_list[3]}"
-            IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
-            CHECKSUM_URL="https://getfedora.org/static/checksums/37/images/Fedora-Cloud-37-1.7-x86_64-CHECKSUM"
+            IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/38/Cloud/x86_64/images/Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
+            CHECKSUM_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/38/Cloud/x86_64/images/Fedora-Cloud-38-1.6-x86_64-CHECKSUM"
             SHA=256
-            CLOUDIMG_NAME="Fedora-Cloud-Base-37-1.7.x86_64.qcow2"
+            CLOUDIMG_NAME="Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
             break
             ;;
         "${distro_list[4]}")

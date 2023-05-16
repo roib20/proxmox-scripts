@@ -6,7 +6,7 @@ Various distros are avaible to download and configure. Current choices include:
 - Ubuntu Cloud 22.04
 - Ubuntu Cloud 22.04 (Minimal)
 - Debian 11 (GenericCloud)
-- Fedora Cloud 37 (base)
+- Fedora Cloud 38 (base)
 - AlmaLinux 9 (GenericCloud)
 
 ## FAQ

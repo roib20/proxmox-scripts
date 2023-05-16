@@ -3,8 +3,8 @@
 A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading a TrueNAS ISO and configuring it as a VM.
 
 Multiple versions of TrueNAS are available to download:
-  - TrueNAS SCALE 22.12.1
-  - TrueNAS CORE 13.0-U3.1
+  - TrueNAS SCALE 22.12.2
+  - TrueNAS CORE 13.0-U4
 
 ## FAQ
 

@@ -3,16 +3,20 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    local distro_list=("TrueNAS SCALE 22.12.1" "TrueNAS CORE 13.0-U3.1" "Quit")
+    local TRUENAS_SCALE_VERSION="22.12.2"
+    local TRUENAS_CORE_VERSION="13.0"
+    local TRUENAS_CORE_UPDATE="U4"
+
+    local distro_list=("TrueNAS SCALE ${TRUENAS_SCALE_VERSION}" "TrueNAS CORE ${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
         "${distro_list[0]}")
             echo -e "${distro_list[0]}"
             TEMPLATE_NAME="TrueNAS-SCALE"
             OSTYPE="l26"
-            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.1/TrueNAS-SCALE-22.12.1.iso"
-            CLOUDIMG_NAME="TrueNAS-SCALE-22.12.1.iso"
-            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/22.12.1/TrueNAS-SCALE-22.12.1.iso.sha256"
+            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
+            CLOUDIMG_NAME="TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
+            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}iso.sha256"
             SHA=256
             break
             ;;
@@ -20,9 +24,9 @@ choose_distro() {
             echo -e "${distro_list[1]}"
             TEMPLATE_NAME="TrueNAS-CORE"
             OSTYPE="other"
-            IMAGE_URL="https://download.freenas.org/13.0/STABLE/U3.1/x64/TrueNAS-13.0-U3.1.iso"
-            CLOUDIMG_NAME="TrueNAS-13.0-U3.1.iso"
-            CHECKSUM="05e12c9599f5bd11d565efdb3ed5aa776fadc4ae54013495ca7f04f78909eee0  ${CLOUDIMG_NAME}"
+            IMAGE_URL="https://download.freenas.org/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
+            CLOUDIMG_NAME="TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
+            CHECKSUM="fb5ee9cc5233267fa5e3c85864e9169e491295e7be3712dc4093c2732968d54a  ${CLOUDIMG_NAME}"
             SHA=256
             break
             ;;

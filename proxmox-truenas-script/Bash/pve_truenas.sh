@@ -26,7 +26,7 @@ choose_distro() {
             OSTYPE="other"
             IMAGE_URL="https://download.freenas.org/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
             CLOUDIMG_NAME="TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
-            CHECKSUM_URL="https://download.freenas.org/13.0/STABLE/U5/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso.sha256"
+            CHECKSUM_URL="https://download.freenas.org/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso.sha256"
             CHECKSUM="$(curl -s "$CHECKSUM_URL" | grep -oP "(?<= = ).*$")  ${CLOUDIMG_NAME}"
             SHA=256
             break

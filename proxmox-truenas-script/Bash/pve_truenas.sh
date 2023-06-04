@@ -5,7 +5,7 @@ choose_distro() {
     PS3="Please choose a distro image to download (1-6): "
     local TRUENAS_SCALE_VERSION="22.12.2"
     local TRUENAS_CORE_VERSION="13.0"
-    local TRUENAS_CORE_UPDATE="U4"
+    local TRUENAS_CORE_UPDATE="U5"
 
     local distro_list=("TrueNAS SCALE ${TRUENAS_SCALE_VERSION}" "TrueNAS CORE ${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}" "Quit")
     select distro in "${distro_list[@]}"; do
@@ -26,7 +26,8 @@ choose_distro() {
             OSTYPE="other"
             IMAGE_URL="https://download.freenas.org/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
             CLOUDIMG_NAME="TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
-            CHECKSUM="fb5ee9cc5233267fa5e3c85864e9169e491295e7be3712dc4093c2732968d54a  ${CLOUDIMG_NAME}"
+            CHECKSUM_URL="https://download.freenas.org/13.0/STABLE/U5/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso.sha256"
+            CHECKSUM="$(curl -s "$CHECKSUM_URL" | grep -oP "(?<= = ).*$")  ${CLOUDIMG_NAME}"
             SHA=256
             break
             ;;

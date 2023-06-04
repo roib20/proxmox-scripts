@@ -4,7 +4,7 @@ A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading
 
 Multiple versions of TrueNAS are available to download:
   - TrueNAS SCALE 22.12.2
-  - TrueNAS CORE 13.0-U4
+  - TrueNAS CORE 13.0-U5
 
 ## FAQ
 

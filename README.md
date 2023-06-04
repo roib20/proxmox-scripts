@@ -1,4 +1,4 @@
-[![CalVer](https://img.shields.io/badge/calver-YY.0M.MICRO-22bfda.svg)]([https://img.shields.io/badge/calver-YY.0M.MICRO-22bfda.svg](https://calver.org))
+[![CalVer](https://img.shields.io/badge/calver-YY.0M.MICRO-22bfda.svg)](https://calver.org)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 [![ShellCheck](https://github.com/roib20/proxmox-scripts/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/roib20/proxmox-scripts/actions/workflows/shellcheck.yml)
 

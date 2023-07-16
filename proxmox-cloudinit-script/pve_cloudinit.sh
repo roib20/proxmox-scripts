@@ -3,7 +3,7 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    local distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Debian 11 (GenericCloud)"
+    local distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Debian 11 (GenericCloud)" "Debian 12 (GenericCloud)"
         "Fedora Cloud 38 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
@@ -32,6 +32,14 @@ choose_distro() {
             break
             ;;
         "${distro_list[3]}")
+            echo -e "${distro_list[2]}"
+            IMAGE_URL="https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2"
+            CHECKSUM_URL="https://cloud.debian.org/images/cloud/bookworm/latest/SHA512SUMS"
+            SHA=512
+            CLOUDIMG_NAME="debian-12-genericcloud-amd64.qcow2"
+            break
+            ;;
+        "${distro_list[4]}")
             echo -e "${distro_list[3]}"
             IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/38/Cloud/x86_64/images/Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
             CHECKSUM_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/38/Cloud/x86_64/images/Fedora-Cloud-38-1.6-x86_64-CHECKSUM"
@@ -39,7 +47,7 @@ choose_distro() {
             CLOUDIMG_NAME="Fedora-Cloud-Base-38-1.6.x86_64.qcow2"
             break
             ;;
-        "${distro_list[4]}")
+        "${distro_list[5]}")
             echo -e "${distro_list[4]}"
             IMAGE_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
             CHECKSUM_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/CHECKSUM"

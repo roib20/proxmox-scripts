@@ -3,7 +3,7 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    local distro_list=("Ubuntu Cloud 22.04" "Ubuntu Cloud 22.04 (Minimal)" "Ubuntu Cloud 23.04" "Ubuntu Cloud 23.04 (Minimal)" "Debian 11 (GenericCloud)" "Debian 12 (GenericCloud)"
+    local distro_list=("Ubuntu Cloud 22.04 LTS" "Ubuntu Cloud 22.04 LTS (Minimal)" "Ubuntu Cloud 23.04" "Ubuntu Cloud 23.04 (Minimal)" "Debian 11 (GenericCloud)" "Debian 12 (GenericCloud)"
         "Fedora Cloud 38 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in

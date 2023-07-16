@@ -28,7 +28,7 @@ choose_distro() {
             IMAGE_URL="https://cloud-images.ubuntu.com/lunar/current/lunar-server-cloudimg-amd64.img"
             CHECKSUM_URL="https://cloud-images.ubuntu.com/lunar/current/SHA256SUMS"
             SHA=256
-            CLOUDIMG_NAME="jammy-server-cloudimg-amd64.img"
+            CLOUDIMG_NAME="lunar-server-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[3]}")
@@ -36,7 +36,7 @@ choose_distro() {
             IMAGE_URL="https://cloud-images.ubuntu.com/minimal/releases/lunar/release/ubuntu-23.04-minimal-cloudimg-amd64.img"
             CHECKSUM_URL="https://cloud-images.ubuntu.com/minimal/releases/lunar/release/SHA256SUMS"
             SHA=256
-            CLOUDIMG_NAME="ubuntu-22.04-minimal-cloudimg-amd64.img"
+            CLOUDIMG_NAME="ubuntu-23.04-minimal-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[4]}")

@@ -14,9 +14,9 @@ choose_distro() {
             echo -e "${distro_list[0]}"
             TEMPLATE_NAME="TrueNAS-SCALE"
             OSTYPE="l26"
-            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
+            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
             CLOUDIMG_NAME="TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
-            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Bluefin/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
+            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
             SHA=256
             break
             ;;

@@ -5,8 +5,8 @@ A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading
 Various distros are avaible to download and configure. Current choices include:
 - [Ubuntu Cloud 22.04 (Jammy Jellyfish)](https://cloud-images.ubuntu.com/jammy/)
 - [Ubuntu Minimal Cloud 22.04 LTS (Jammy Jellyfish)](https://cloud-images.ubuntu.com/minimal/releases/jammy/)
-- [Ubuntu Cloud 23.10 (Mantic Minotau)](https://cloud-images.ubuntu.com/lunar/)
-- [Ubuntu Minimal Cloud 23.10 (Mantic Minotau)](https://cloud-images.ubuntu.com/minimal/releases/mantic/)
+- [Ubuntu Cloud 23.10 (Mantic Minotaur)](https://cloud-images.ubuntu.com/lunar/)
+- [Ubuntu Minimal Cloud 23.10 (Mantic Minotaur)](https://cloud-images.ubuntu.com/minimal/releases/mantic/)
 - [Debian 11 "bullseye" (GenericCloud)](https://cloud.debian.org/images/cloud/bullseye/)
 - [Debian 12 "bookworm" (GenericCloud)](https://cloud.debian.org/images/cloud/bookworm/)
 - [Fedora Cloud 39 (base)](https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/)

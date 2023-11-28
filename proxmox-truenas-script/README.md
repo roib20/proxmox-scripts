@@ -2,8 +2,11 @@
 
 A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading a TrueNAS ISO and configuring it as a VM.
 
+**NOTICE: ZFS corruption bug**
+The following versions of TrueNAS SCALE and CORE (present in version 23.11 of this script) suffer from a [ZFS corruption bug](https://www.truenas.com/community/threads/silent-corruption-with-openzfs-ongoing-discussion-and-testing.114390/). For now, I recommend using [version 23.08](https://github.com/roib20/proxmox-scripts/releases/tag/23.08) of this script which is not affected by this bug. I will update the scripts after fixed TrueNAS versions are released.
+
 Multiple versions of TrueNAS are available to download:
-  - [TrueNAS SCALE](https://www.truenas.com/download-truenas-scale/) 22.12.3.3
+  - [TrueNAS SCALE](https://www.truenas.com/download-truenas-scale/) 23.10.0.1
   - [TrueNAS CORE](https://www.truenas.com/download-truenas-core/) 13.0-U5.3
 
 ## FAQ

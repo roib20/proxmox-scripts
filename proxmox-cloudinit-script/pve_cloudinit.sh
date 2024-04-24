@@ -60,7 +60,7 @@ choose_distro() {
             IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-Base-Generic.x86_64-40-1.14.qcow2"
             CHECKSUM_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-40-1.14-x86_64-CHECKSUM"
             SHA=256
-            CLOUDIMG_NAME="Fedora-Cloud-Base-40-1.x.x86_64.qcow2"
+            CLOUDIMG_NAME="Fedora-Cloud-40-1.14-x86_64.qcow2"
             break
             ;;
         "${distro_list[7]}")

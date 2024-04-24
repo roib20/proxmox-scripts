@@ -1,6 +1,6 @@
 # Proxmox VE script for generating Cloud-init templates
 
-A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
+A user-friendly guided script for Proxmox VE 8.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
 
 Various distros are avaible to download and configure. Current choices include:
 - [Ubuntu Cloud 22.04 LS (Jammy Jellyfish)](https://cloud-images.ubuntu.com/jammy/)

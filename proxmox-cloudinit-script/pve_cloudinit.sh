@@ -3,8 +3,8 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    local distro_list=("Ubuntu Cloud 22.04 LTS" "Ubuntu Cloud 22.04 LTS (Minimal)" "Ubuntu Cloud 23.10" "Ubuntu Cloud 23.10 (Minimal)" "Debian 11 (GenericCloud)" "Debian 12 (GenericCloud)"
-        "Fedora Cloud 39 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
+    local distro_list=("Ubuntu Cloud 22.04 LTS" "Ubuntu Cloud 22.04 LTS (Minimal)" "Ubuntu Cloud 24.04 LTS" "Ubuntu Cloud 24.04 LTS (Minimal)" "Debian 11 (GenericCloud)" "Debian 12 (GenericCloud)"
+        "Fedora Cloud 40 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
         "${distro_list[0]}")
@@ -25,18 +25,18 @@ choose_distro() {
             ;;
         "${distro_list[2]}")
             echo -e "${distro_list[0]}"
-            IMAGE_URL="https://cloud-images.ubuntu.com/mantic/current/mantic-server-cloudimg-amd64.img"
-            CHECKSUM_URL="https://cloud-images.ubuntu.com/mantic/current/SHA256SUMS"
+            IMAGE_URL="https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+            CHECKSUM_URL="https://cloud-images.ubuntu.com/noble/current/SHA256SUMS"
             SHA=256
-            CLOUDIMG_NAME="mantic-server-cloudimg-amd64.img"
+            CLOUDIMG_NAME="noble-server-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[3]}")
             echo -e "${distro_list[1]}"
-            IMAGE_URL="https://cloud-images.ubuntu.com/minimal/releases/mantic/release/ubuntu-23.10-minimal-cloudimg-amd64.img"
-            CHECKSUM_URL="https://cloud-images.ubuntu.com/minimal/releases/mantic/release/SHA256SUMS"
+            IMAGE_URL="https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img"
+            CHECKSUM_URL="https://cloud-images.ubuntu.com/minimal/releases/noble/release/SHA256SUMS"
             SHA=256
-            CLOUDIMG_NAME="ubuntu-23.10-minimal-cloudimg-amd64.img"
+            CLOUDIMG_NAME="ubuntu-24.04-minimal-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[4]}")
@@ -57,10 +57,10 @@ choose_distro() {
             ;;
         "${distro_list[6]}")
             echo -e "${distro_list[3]}"
-            IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-Base-39-1.5.x86_64.qcow2"
-            CHECKSUM_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-39-1.5-x86_64-CHECKSUM"
+            IMAGE_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-Base-Generic.x86_64-40-1.14.qcow2"
+            CHECKSUM_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-40-1.14-x86_64-CHECKSUM"
             SHA=256
-            CLOUDIMG_NAME="Fedora-Cloud-Base-39-1.5.x86_64.qcow2"
+            CLOUDIMG_NAME="Fedora-Cloud-40-1.14-x86_64.qcow2"
             break
             ;;
         "${distro_list[7]}")

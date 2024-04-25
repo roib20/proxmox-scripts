@@ -1,15 +1,15 @@
 # Proxmox VE script for generating Cloud-init templates
 
-A user-friendly guided script for Proxmox VE 7.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
+A user-friendly guided script for Proxmox VE 8.x. Guides you through downloading a Linux cloud image and automatically configuring it as a Cloud-init template - that can then be used to easily generate VMs!
 
 Various distros are avaible to download and configure. Current choices include:
-- [Ubuntu Cloud 22.04 (Jammy Jellyfish)](https://cloud-images.ubuntu.com/jammy/)
+- [Ubuntu Cloud 22.04 LS (Jammy Jellyfish)](https://cloud-images.ubuntu.com/jammy/)
 - [Ubuntu Minimal Cloud 22.04 LTS (Jammy Jellyfish)](https://cloud-images.ubuntu.com/minimal/releases/jammy/)
-- [Ubuntu Cloud 23.10 (Mantic Minotaur)](https://cloud-images.ubuntu.com/lunar/)
-- [Ubuntu Minimal Cloud 23.10 (Mantic Minotaur)](https://cloud-images.ubuntu.com/minimal/releases/mantic/)
+- [Ubuntu Cloud 24.04 LTS (Noble Numbat)](https://cloud-images.ubuntu.com/noble/)
+- [Ubuntu Minimal Cloud 24.04 LTS (Noble Numbat)](https://cloud-images.ubuntu.com/minimal/releases/noble/)
 - [Debian 11 "bullseye" (GenericCloud)](https://cloud.debian.org/images/cloud/bullseye/)
 - [Debian 12 "bookworm" (GenericCloud)](https://cloud.debian.org/images/cloud/bookworm/)
-- [Fedora Cloud 39 (base)](https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/)
+- [Fedora Cloud 40 (base)](https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/)
 - [AlmaLinux 9 (GenericCloud)](https://repo.almalinux.org/almalinux/9/cloud/)
 
 ## FAQ

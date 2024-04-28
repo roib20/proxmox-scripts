@@ -9,10 +9,10 @@ choose_distro() {
         case $distro in
         "${distro_list[0]}")
             echo -e "${distro_list[0]}"
-            IMAGE_URL="https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
-            CHECKSUM_URL="https://cloud-images.ubuntu.com/jammy/current/SHA256SUMS"
+            IMAGE_URL="https://cloud-images.ubuntu.com/releases/jammy/release/ubuntu-22.04-server-cloudimg-amd64.img"
+            CHECKSUM_URL="https://cloud-images.ubuntu.com/releases/jammy/release/SHA256SUMS"
             SHA=256
-            CLOUDIMG_NAME="jammy-server-cloudimg-amd64.img"
+            CLOUDIMG_NAME="ubuntu-22.04-server-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[1]}")
@@ -25,10 +25,10 @@ choose_distro() {
             ;;
         "${distro_list[2]}")
             echo -e "${distro_list[0]}"
-            IMAGE_URL="https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
-            CHECKSUM_URL="https://cloud-images.ubuntu.com/noble/current/SHA256SUMS"
+            IMAGE_URL="https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img"
+            CHECKSUM_URL="https://cloud-images.ubuntu.com/releases/noble/release/SHA256SUMS"
             SHA=256
-            CLOUDIMG_NAME="noble-server-cloudimg-amd64.img"
+            CLOUDIMG_NAME="ubuntu-24.04-server-cloudimg-amd64.img"
             break
             ;;
         "${distro_list[3]}")

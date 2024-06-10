@@ -3,8 +3,9 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    TRUENAS_SCALE_MIRROR="https://download.sys.truenas.net"      # Alternative mirror: "https://download.truenas.com"
-    TRUENAS_CORE_MIRROR="https://download-core.sys.truenas.net"  # Alternative mirror: "https://download.freenas.org"
+    local TRUENAS_SCALE_MIRROR="https://download.sys.truenas.net"      # Alternative mirror: "https://download.truenas.com"
+    local TRUENAS_CORE_MIRROR="https://download-core.sys.truenas.net"  # Alternative mirror: "https://download.freenas.org"
+    local TRUENAS_SCALE_CODENAME="Dragonfish" # 24.04
     local TRUENAS_SCALE_VERSION="24.04.1.1"
     local TRUENAS_CORE_VERSION="13.0"
     local TRUENAS_CORE_UPDATE="U6.1"
@@ -16,9 +17,9 @@ choose_distro() {
             echo -e "${distro_list[0]}"
             TEMPLATE_NAME="TrueNAS-SCALE"
             OSTYPE="l26"
-            IMAGE_URL="${TRUENAS_SCALE_MIRROR}/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
+            IMAGE_URL="${TRUENAS_SCALE_MIRROR}/TrueNAS-SCALE-${TRUENAS_SCALE_CODENAME}/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
             CLOUDIMG_NAME="TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
-            CHECKSUM_URL="${TRUENAS_SCALE_MIRROR}/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
+            CHECKSUM_URL="${TRUENAS_SCALE_MIRROR}/TrueNAS-SCALE-${TRUENAS_SCALE_CODENAME}/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
             SHA=256
             break
             ;;

@@ -3,7 +3,7 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
-    local TRUENAS_SCALE_VERSION="24.04.0"
+    local TRUENAS_SCALE_VERSION="24.04.1.1"
     local TRUENAS_CORE_VERSION="13.0"
     local TRUENAS_CORE_UPDATE="U6.1"
 

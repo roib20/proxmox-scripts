@@ -3,6 +3,8 @@
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
     PS3="Please choose a distro image to download (1-6): "
+    TRUENAS_SCALE_MIRROR="https://download.sys.truenas.net"      # Alternative mirror: "https://download.truenas.com"
+    TRUENAS_CORE_MIRROR="https://download-core.sys.truenas.net"  # Alternative mirror: "https://download.freenas.org"
     local TRUENAS_SCALE_VERSION="24.04.1.1"
     local TRUENAS_CORE_VERSION="13.0"
     local TRUENAS_CORE_UPDATE="U6.1"
@@ -14,9 +16,9 @@ choose_distro() {
             echo -e "${distro_list[0]}"
             TEMPLATE_NAME="TrueNAS-SCALE"
             OSTYPE="l26"
-            IMAGE_URL="https://download.truenas.com/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
+            IMAGE_URL="${TRUENAS_SCALE_MIRROR}/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
             CLOUDIMG_NAME="TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso"
-            CHECKSUM_URL="https://download.truenas.com/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
+            CHECKSUM_URL="${TRUENAS_SCALE_MIRROR}/TrueNAS-SCALE-Cobia/${TRUENAS_SCALE_VERSION}/TrueNAS-SCALE-${TRUENAS_SCALE_VERSION}.iso.sha256"
             SHA=256
             break
             ;;
@@ -24,9 +26,9 @@ choose_distro() {
             echo -e "${distro_list[1]}"
             TEMPLATE_NAME="TrueNAS-CORE"
             OSTYPE="other"
-            IMAGE_URL="https://download.freenas.org/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
+            IMAGE_URL="${TRUENAS_CORE_MIRROR}/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
             CLOUDIMG_NAME="TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso"
-            CHECKSUM_URL="https://download.freenas.org/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso.sha256"
+            CHECKSUM_URL="${TRUENAS_CORE_MIRROR}/${TRUENAS_CORE_VERSION}/STABLE/${TRUENAS_CORE_UPDATE}/x64/TrueNAS-${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}.iso.sha256"
             CHECKSUM="$(curl -s "$CHECKSUM_URL" | grep -oP "(?<= = ).*$")  ${CLOUDIMG_NAME}"
             SHA=256
             break

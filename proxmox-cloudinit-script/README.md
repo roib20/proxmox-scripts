@@ -10,7 +10,10 @@ Various distros are avaible to download and configure. Current choices include:
 - [Debian 11 "bullseye" (GenericCloud)](https://cloud.debian.org/images/cloud/bullseye/)
 - [Debian 12 "bookworm" (GenericCloud)](https://cloud.debian.org/images/cloud/bookworm/)
 - [Fedora Cloud 40 (base)](https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/)
+- [Fedora Cloud 41 (base)](https://download.fedoraproject.org/pub/fedora/linux/releases/41/Cloud/)
 - [AlmaLinux 9 (GenericCloud)](https://repo.almalinux.org/almalinux/9/cloud/)
+- [FreeBSD 14.1 (Basic)](https://download.freebsd.org/releases/VM-IMAGES/14.1-RELEASE/)
+- [CentOS 9 Stream (GenericCloud)](https://cloud.centos.org/centos/9-stream/)
 
 ## FAQ
 ### What is Cloud-init?

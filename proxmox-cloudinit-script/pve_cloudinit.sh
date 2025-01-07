@@ -13,6 +13,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud-images.ubuntu.com/releases/jammy/release/SHA256SUMS"
             SHA=256
             CLOUDIMG_NAME="ubuntu-22.04-server-cloudimg-amd64.img"
+            TEMPLATE_NAME="ubuntu-22.04-template"
             break
             ;;
         "${distro_list[1]}")
@@ -21,6 +22,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud-images.ubuntu.com/minimal/releases/jammy/release/SHA256SUMS"
             SHA=256
             CLOUDIMG_NAME="ubuntu-22.04-minimal-cloudimg-amd64.img"
+            TEMPLATE_NAME="ubuntu-22.04-minimal-template"
             break
             ;;
         "${distro_list[2]}")
@@ -29,6 +31,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud-images.ubuntu.com/releases/noble/release/SHA256SUMS"
             SHA=256
             CLOUDIMG_NAME="ubuntu-24.04-server-cloudimg-amd64.img"
+            TEMPLATE_NAME="ubuntu-24.04-template"
             break
             ;;
         "${distro_list[3]}")
@@ -37,6 +40,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud-images.ubuntu.com/minimal/releases/noble/release/SHA256SUMS"
             SHA=256
             CLOUDIMG_NAME="ubuntu-24.04-minimal-cloudimg-amd64.img"
+            TEMPLATE_NAME="ubuntu-24.04-minimal-template"
             break
             ;;
         "${distro_list[4]}")
@@ -45,6 +49,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud.debian.org/images/cloud/bullseye/latest/SHA512SUMS"
             SHA=512
             CLOUDIMG_NAME="debian-11-genericcloud-amd64.qcow2"
+            TEMPLATE_NAME="debian-11-template"
             break
             ;;
         "${distro_list[5]}")
@@ -53,6 +58,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud.debian.org/images/cloud/bookworm/latest/SHA512SUMS"
             SHA=512
             CLOUDIMG_NAME="debian-12-genericcloud-amd64.qcow2"
+            TEMPLATE_NAME="debian-12-template"
             break
             ;;
         "${distro_list[6]}")
@@ -61,6 +67,7 @@ choose_distro() {
             CHECKSUM_URL="https://download.fedoraproject.org/pub/fedora/linux/releases/40/Cloud/x86_64/images/Fedora-Cloud-40-1.14-x86_64-CHECKSUM"
             SHA=256
             CLOUDIMG_NAME="Fedora-Cloud-40-1.14-x86_64.qcow2"
+            TEMPLATE_NAME="fedora-40-template"
             break
             ;;
         "${distro_list[7]}")
@@ -69,6 +76,7 @@ choose_distro() {
             CHECKSUM_URL="https://mirror.i3d.net/pub/fedora/linux/releases/41/Cloud/x86_64/images/Fedora-Cloud-41-1.4-x86_64-CHECKSUM"
             SHA=256
             CLOUDIMG_NAME="Fedora-Cloud-Base-Generic-41-1.4.x86_64.qcow2"
+            TEMPLATE_NAME="fedora-41-template"
             break
             ;;
         "${distro_list[8]}")
@@ -77,6 +85,7 @@ choose_distro() {
             CHECKSUM_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/CHECKSUM"
             SHA=256
             CLOUDIMG_NAME="AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
+            TEMPLATE_NAME="almalinux-9-template"
             break
             ;;
         "${distro_list[9]}")
@@ -85,6 +94,7 @@ choose_distro() {
             CHECKSUM_URL="https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2.CHECKSUM"
             SHA=256
             CLOUDIMG_NAME="Rocky-9-GenericCloud.latest.x86_64.qcow2"
+            TEMPLATE_NAME="rockylinux-9-template"
             break
             ;;
         "${distro_list[10]}")
@@ -93,6 +103,7 @@ choose_distro() {
             CHECKSUM_URL="https://download.freebsd.org/releases/VM-IMAGES/14.1-RELEASE/amd64/Latest/CHECKSUM.SHA256"
             SHA=256
             CLOUDIMG_NAME="FreeBSD-14.1-RELEASE-amd64-BASIC-CLOUDINIT-zfs.qcow2.xz"
+            TEMPLATE_NAME="freebsd-14.1-template"
             break
             ;;
         "${distro_list[11]}")
@@ -101,6 +112,7 @@ choose_distro() {
             CHECKSUM_URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2.SHA256SUM"
             SHA=256
             CLOUDIMG_NAME="CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2"
+            TEMPLATE_NAME="Centos-9-stream-template"
             break
             ;;
         "Quit")
@@ -367,7 +379,6 @@ main() {
     choose_storage "$@"
     choose_agent "$@"
     choose_libguestfs "$@"
-    TEMPLATE_NAME="Template-Cloud-init"
 
     # # add date to filename
     # date=$(date --iso-8601=date)

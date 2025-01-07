@@ -250,7 +250,7 @@ download_image() {
 
 qm_create() {
     # create a new VM with VirtIO SCSI single controller
-    qm create "${ID}" --name "${TEMPLATE_NAME}" --memory 2048 --core 1 \
+    qm create "${ID}" --name "${TEMPLATE_NAME}" --memory 2048 --balloon 1024 --core 1 --cpu x86-64-v2-AES --numa 1 \
         --net0 virtio,bridge=vmbr0,firewall=1 --scsihw virtio-scsi-single \
         --agent "${agent_params}"
 

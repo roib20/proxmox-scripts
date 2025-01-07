@@ -2,9 +2,9 @@
 
 choose_distro() {
     echo -e "Welcome to the Proxmox Cloud-Init template installer!\n"
-    PS3="Please choose a distro image to download (1-9): "
+    PS3="Please choose a distro image to download (1-12): "
     local distro_list=("Ubuntu Cloud 22.04 LTS" "Ubuntu Cloud 22.04 LTS (Minimal)" "Ubuntu Cloud 24.04 LTS" "Ubuntu Cloud 24.04 LTS (Minimal)" "Debian 11 (GenericCloud)" "Debian 12 (GenericCloud)"
-        "Fedora Cloud 40 (base)" "AlmaLinux 9 (GenericCloud)" "Quit")
+        "Fedora Cloud 40 (base)" "Fedora Cloud 41 (base)" "AlmaLinux 9 (GenericCloud)" "RockyLinux 9 (GenericCloud)"  "FreeBSD 14.1 (Basic)" "CentOS 9 Stream (GenericCloud)" "Quit")
     select distro in "${distro_list[@]}"; do
         case $distro in
         "${distro_list[0]}")
@@ -64,11 +64,43 @@ choose_distro() {
             break
             ;;
         "${distro_list[7]}")
-            echo -e "${distro_list[4]}"
+            echo -e "${distro_list[7]}"
+            IMAGE_URL="https://mirror.nl.mirhosting.net/fedora/linux/releases/41/Cloud/x86_64/images/Fedora-Cloud-Base-Generic-41-1.4.x86_64.qcow2"
+            CHECKSUM_URL="https://mirror.i3d.net/pub/fedora/linux/releases/41/Cloud/x86_64/images/Fedora-Cloud-41-1.4-x86_64-CHECKSUM"
+            SHA=256
+            CLOUDIMG_NAME="Fedora-Cloud-Base-Generic-41-1.4.x86_64.qcow2"
+            break
+            ;;
+        "${distro_list[8]}")
+            echo -e "${distro_list[8]}"
             IMAGE_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
             CHECKSUM_URL="https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/CHECKSUM"
             SHA=256
             CLOUDIMG_NAME="AlmaLinux-9-GenericCloud-latest.x86_64.qcow2"
+            break
+            ;;
+        "${distro_list[9]}")
+            echo -e "${distro_list[9]}"
+            IMAGE_URL="https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2"
+            CHECKSUM_URL="https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2.CHECKSUM"
+            SHA=256
+            CLOUDIMG_NAME="Rocky-9-GenericCloud.latest.x86_64.qcow2"
+            break
+            ;;
+        "${distro_list[10]}")
+            echo -e "${distro_list[10]}"
+            IMAGE_URL="https://download.freebsd.org/releases/VM-IMAGES/14.1-RELEASE/amd64/Latest/FreeBSD-14.1-RELEASE-amd64-BASIC-CLOUDINIT-zfs.qcow2.xz"
+            CHECKSUM_URL="https://download.freebsd.org/releases/VM-IMAGES/14.1-RELEASE/amd64/Latest/CHECKSUM.SHA256"
+            SHA=256
+            CLOUDIMG_NAME="FreeBSD-14.1-RELEASE-amd64-BASIC-CLOUDINIT-zfs.qcow2.xz"
+            break
+            ;;
+        "${distro_list[11]}")
+            echo -e "${distro_list[11]}"
+            IMAGE_URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2"
+            CHECKSUM_URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2.SHA256SUM"
+            SHA=256
+            CLOUDIMG_NAME="CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2"
             break
             ;;
         "Quit")

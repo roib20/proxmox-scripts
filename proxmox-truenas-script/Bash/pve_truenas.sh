@@ -6,9 +6,9 @@ choose_distro() {
     local TRUENAS_SCALE_MIRROR="https://download.sys.truenas.net"      # Alternative mirror: "https://download.truenas.com"
     local TRUENAS_CORE_MIRROR="https://download-core.sys.truenas.net"  # Alternative mirror: "https://download.freenas.org"
     local TRUENAS_SCALE_CODENAME="Dragonfish" # 24.04
-    local TRUENAS_SCALE_VERSION="24.04.1.1"
+    local TRUENAS_SCALE_VERSION="24.10.1"
     local TRUENAS_CORE_VERSION="13.0"
-    local TRUENAS_CORE_UPDATE="U6.1"
+    local TRUENAS_CORE_UPDATE="U6.4"
 
     local distro_list=("TrueNAS SCALE ${TRUENAS_SCALE_VERSION}" "TrueNAS CORE ${TRUENAS_CORE_VERSION}-${TRUENAS_CORE_UPDATE}" "Quit")
     select distro in "${distro_list[@]}"; do
